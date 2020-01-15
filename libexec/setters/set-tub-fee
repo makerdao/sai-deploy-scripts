@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET TUB FEE:"
+
+fee=$(jq -r ".tub_fee | values" "$CONFIG_FILE")
+fee=$(bc -l <<< "scale=27; e( l(${fee} / 100 + 1)/(60 * 60 * 24 * 365)) * 10^27")
+fee=$(seth --to-uint256 "${fee%.*}")
+sethSend "$SAI_MOM" 'setFee(uint256)' "$fee"

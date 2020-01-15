@@ -1,0 +1,19 @@
+{
+  "description": "Kovan deployment",
+  "tub_cap": "100000000",
+  "tub_mat": "150",
+  "tub_tax": "0",
+  "tub_fee": "5",
+  "tub_axe": "13",
+  "tub_gap": "0",
+  "tap_gap": "3",
+  "vox_way": "0",
+  "vox_how": "0",
+  "pit": "0xbd747742b0f1f9791d3e6b85f8797a0cf4fbf10b",
+  "import": {
+    "gem": "0xd0a1e359811322d97991e03f863a0c30c2cf029c",
+    "gov": "0xaaf64bfcc32d0f15873a02163e7e500671a4ffcd",
+    "pip": "0xa5aa4e07f5255e14f02b385b1f04b35cc50bdb66",
+    "pep": "0xebaa5d5cfe7f1201bebc6fb88240bbef285b4fee"
+  }
+}

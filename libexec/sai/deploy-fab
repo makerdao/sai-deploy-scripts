@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+export SETH_ASYNC=yes
+
+GEM_FABtx=$(dappCreate sai GemFab)
+VOX_FABtx=$(dappCreate sai VoxFab)
+TUB_FABtx=$(dappCreate sai TubFab)
+TAP_FABtx=$(dappCreate sai TapFab)
+TOP_FABtx=$(dappCreate sai TopFab)
+MOM_FABtx=$(dappCreate sai MomFab)
+DAD_FABtx=$(dappCreate sai DadFab)
+
+export SETH_ASYNC=no
+
+GEM_FAB=$(seth receipt "$GEM_FABtx" contractAddress)
+VOX_FAB=$(seth receipt "$VOX_FABtx" contractAddress)
+TUB_FAB=$(seth receipt "$TUB_FABtx" contractAddress)
+TAP_FAB=$(seth receipt "$TAP_FABtx" contractAddress)
+TOP_FAB=$(seth receipt "$TOP_FABtx" contractAddress)
+MOM_FAB=$(seth receipt "$MOM_FABtx" contractAddress)
+DAD_FAB=$(seth receipt "$DAD_FABtx" contractAddress)
+
+log "GEM_FAB: $GEM_FAB"
+log "VOX_FAB: $VOX_FAB"
+log "TUB_FAB: $TUB_FAB"
+log "TAP_FAB: $TAP_FAB"
+log "TOP_FAB: $TOP_FAB"
+log "MOM_FAB: $MOM_FAB"
+log "DAD_FAB: $DAD_FAB"
+
+cat > "$OUT_DIR/load-fabs-addr-temp" << EOF
+#!/bin/bash
+export GEM_FAB=$GEM_FAB
+export VOX_FAB=$VOX_FAB
+export TAP_FAB=$TAP_FAB
+export TUB_FAB=$TUB_FAB
+export TOP_FAB=$TOP_FAB
+export MOM_FAB=$MOM_FAB
+export DAD_FAB=$DAD_FAB
+EOF

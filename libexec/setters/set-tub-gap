@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET TUB GAP:"
+
+gap=$(jq -r ".tub_gap | values" "$CONFIG_FILE")
+gap=$(bc -l <<< "scale=18; e( l(-${gap} / 100 + 1)/(60 * 60 * 24 * 365)) * 10^18")
+gap=$(seth --to-uint256 "${gap%.*}")
+sethSend "$SAI_MOM" 'setTubGap(uint256)' "$gap"

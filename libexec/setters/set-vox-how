@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET VOX HOW:"
+
+how=$(jq -r ".vox_how | values" "$CONFIG_FILE")
+how=$(echo "$how"*10^27 | bc -l)
+how=$(seth --to-uint256 "${how%.*}")
+sethSend "$SAI_MOM" 'setHow(uint256)' "$how"

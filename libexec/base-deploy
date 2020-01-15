@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Deploy Fabs
+"$LIBEXEC_DIR/sai/deploy-fab"
+# shellcheck source=/dev/null
+. "$OUT_DIR/load-fabs-addr-temp"
+rm "$OUT_DIR/load-fabs-addr-temp"
+
+CONFIG_FILE="$OUT_DIR/config.json"
+
+SAI_GEM=$(jq -r ".import .gem | values" "$CONFIG_FILE")
+SAI_GOV=$(jq -r ".import .gov | values" "$CONFIG_FILE")
+SAI_PIP=$(jq -r ".import .pip | values" "$CONFIG_FILE")
+SAI_PEP=$(jq -r ".import .pep | values" "$CONFIG_FILE")
+SAI_PIT=$(jq -r ".pit | values" "$CONFIG_FILE")
+
+# Deploy Core
+"$LIBEXEC_DIR/sai/deploy-core"
+# shellcheck source=/dev/null
+. "$OUT_DIR/load-core-addr-temp"
+rm "$OUT_DIR/load-core-addr-temp"
+
+# Generate addresses.json file
+cat > "$OUT_DIR"/addresses.json <<EOF
+{
+    "SAI_GEM": "$SAI_GEM",
+    "SAI_GOV": "$SAI_GOV",
+    "SAI_PIP": "$SAI_PIP",
+    "SAI_PEP": "$SAI_PEP",
+    "SAI_PIT": "$SAI_PIT",
+    "SAI_ADM": "$SAI_ADM",
+    "SAI_SAI": "$SAI_SAI",
+    "SAI_SIN": "$SAI_SIN",
+    "SAI_SKR": "$SAI_SKR",
+    "SAI_DAD": "$SAI_DAD",
+    "SAI_MOM": "$SAI_MOM",
+    "SAI_VOX": "$SAI_VOX",
+    "SAI_TUB": "$SAI_TUB",
+    "SAI_TAP": "$SAI_TAP",
+    "SAI_TOP": "$SAI_TOP"
+}
+EOF
+
+"$LIBEXEC_DIR"/setters/set-tub-cap
+
+"$LIBEXEC_DIR"/setters/set-tub-mat
+
+"$LIBEXEC_DIR"/setters/set-tub-tax
+
+"$LIBEXEC_DIR"/setters/set-tub-fee
+
+"$LIBEXEC_DIR"/setters/set-tub-axe
+
+"$LIBEXEC_DIR"/setters/set-tub-gap
+
+"$LIBEXEC_DIR"/setters/set-tap-gap
+
+"$LIBEXEC_DIR"/setters/set-vox-way
+
+"$LIBEXEC_DIR"/setters/set-vox-how
+
+"$LIBEXEC_DIR"/setters/set-price
+
+log "EXECUTING FIRST DRIP:"
+sethSend "$SAI_TUB" 'drip()'

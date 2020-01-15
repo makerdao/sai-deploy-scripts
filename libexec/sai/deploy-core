@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+test -z "$SAI_GEM" && SAI_GEM=$(dappCreate sai DSToken "$(seth --to-bytes32 "$(seth --from-ascii 'ETH')")")
+test -z "$SAI_GOV" && SAI_GOV=$(dappCreate sai DSToken "$(seth --to-bytes32 "$(seth --from-ascii 'GOV')")")
+test -z "$SAI_PIP" && SAI_PIP=$(dappCreate sai DSValue)
+test -z "$SAI_PEP" && SAI_PEP=$(dappCreate sai DSValue)
+test -z "$SAI_PIT" && SAI_PIT="0x0000000000000000000000000000000000000123"
+
+DAI_FAB=$(dappCreate sai DaiFab "$GEM_FAB" "$VOX_FAB" "$TUB_FAB" "$TAP_FAB" "$TOP_FAB" "$MOM_FAB" "$DAD_FAB")
+log "DAI_FAB: $DAI_FAB"
+
+if [ -z "$SAI_ADM" ]
+then
+    SAI_ADM=$(dappCreate sai DSRoles)
+    log "SAI_ADM: $SAI_ADM"
+    sethSend "$SAI_ADM" 'setRootUser(address,bool)' "$ETH_FROM" true
+fi
+
+sethSend "$DAI_FAB" 'makeTokens()'
+sethSend "$DAI_FAB" 'makeVoxTub(address,address,address,address,address)' "$SAI_GEM" "$SAI_GOV" "$SAI_PIP" "$SAI_PEP" "$SAI_PIT"
+sethSend "$DAI_FAB" 'makeTapTop()'
+sethSend "$DAI_FAB" 'configParams()'
+sethSend "$DAI_FAB" 'verifyParams()'
+sethSend "$DAI_FAB" 'configAuth(address)' "$SAI_ADM"
+
+SAI_SAI=0x$(seth call "$DAI_FAB" 'sai()(address)')
+SAI_SIN=0x$(seth call "$DAI_FAB" 'sin()(address)')
+SAI_SKR=0x$(seth call "$DAI_FAB" 'skr()(address)')
+SAI_DAD=0x$(seth call "$DAI_FAB" 'dad()(address)')
+SAI_MOM=0x$(seth call "$DAI_FAB" 'mom()(address)')
+SAI_VOX=0x$(seth call "$DAI_FAB" 'vox()(address)')
+SAI_TUB=0x$(seth call "$DAI_FAB" 'tub()(address)')
+SAI_TAP=0x$(seth call "$DAI_FAB" 'tap()(address)')
+SAI_TOP=0x$(seth call "$DAI_FAB" 'top()(address)')
+
+cat > "$OUT_DIR/load-core-addr-temp" << EOF
+#!/bin/bash
+export SAI_GEM=$SAI_GEM
+export SAI_GOV=$SAI_GOV
+export SAI_PIP=$SAI_PIP
+export SAI_PEP=$SAI_PEP
+export SAI_PIT=$SAI_PIT
+export SAI_ADM=$SAI_ADM
+export SAI_SAI=$SAI_SAI
+export SAI_SIN=$SAI_SIN
+export SAI_SKR=$SAI_SKR
+export SAI_DAD=$SAI_DAD
+export SAI_MOM=$SAI_MOM
+export SAI_VOX=$SAI_VOX
+export SAI_TUB=$SAI_TUB
+export SAI_TAP=$SAI_TAP
+export SAI_TOP=$SAI_TOP
+EOF

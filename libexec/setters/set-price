@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+pipAddr=$(jq -r ".pip | values" "$CONFIG_FILE")
+if [[ -z "$pipAddr" ]]; then
+    log "SET PIP PRICE:"
+    sethSend "$SAI_PIP" 'poke(bytes32)' "$(seth --to-uint256 "$(seth --to-wei "$(jq -r ".pipPrice | values" "$CONFIG_FILE")" ETH)")"
+fi
+
+pepAddr=$(jq -r ".pep | values" "$CONFIG_FILE")
+if [[ -z "$pepAddr" ]]; then
+    log "SET PEP PRICE:"
+    sethSend "$SAI_PEP" 'poke(bytes32)' "$(seth --to-uint256 "$(seth --to-wei "$(jq -r ".pepPrice | values" "$CONFIG_FILE")" ETH)")"
+fi

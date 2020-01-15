@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET TUB TAX:"
+
+tax=$(jq -r ".tub_tax | values" "$CONFIG_FILE")
+tax=$(bc -l <<< "scale=27; e( l(${tax} / 100 + 1)/(60 * 60 * 24 * 365)) * 10^27")
+tax=$(seth --to-uint256 "${tax%.*}")
+sethSend "$SAI_MOM" 'setTax(uint256)' "$tax"

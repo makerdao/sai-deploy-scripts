@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET TUB CAP:"
+
+cap=$(jq -r ".tub_cap | values" "$CONFIG_FILE")
+cap=$(echo "$cap"*10^18 | bc)
+cap=$(seth --to-uint256 "${cap%.*}")
+sethSend "$SAI_MOM" 'setCap(uint256)' "$cap"

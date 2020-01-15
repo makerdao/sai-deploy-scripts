@@ -1,0 +1,210 @@
+{
+  "contracts": {
+    "ds-auth_52c6a32": {
+      "deps": {
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-auth",
+      "repo": {
+        "name": "ds-auth-52c6a32",
+        "ref": "HEAD",
+        "rev": "52c6a32a858601859dd809c718b59fb064fa21a7",
+        "url": "https://github.com/dapphub/ds-auth"
+      }
+    },
+    "ds-chief_a06b5e4": {
+      "deps": {
+        "ds-roles": "ds-roles_188b3dd",
+        "ds-test": "ds-test_8053e25",
+        "ds-thing": "ds-thing_4c86a53",
+        "ds-token": "ds-token_e637e3f"
+      },
+      "name": "ds-chief",
+      "repo": {
+        "name": "ds-chief-a06b5e4",
+        "ref": "HEAD",
+        "rev": "a06b5e426a30e1471b93093857760b85e2fcb93a",
+        "url": "https://github.com/dapphub/ds-chief"
+      }
+    },
+    "ds-exec_f6b6176": {
+      "deps": {
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-exec",
+      "repo": {
+        "name": "ds-exec-f6b6176",
+        "ref": "HEAD",
+        "rev": "f6b61769c700326b7c3e7bfad6e9f2c16a9148e1",
+        "url": "https://github.com/dapphub/ds-exec"
+      }
+    },
+    "ds-guard_f8b7f58": {
+      "deps": {
+        "ds-auth": "ds-auth_52c6a32",
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-guard",
+      "repo": {
+        "name": "ds-guard-f8b7f58",
+        "ref": "HEAD",
+        "rev": "f8b7f58c0fb5e88bba376e3dfa7a856617fabc0e",
+        "url": "https://github.com/dapphub/ds-guard"
+      }
+    },
+    "ds-math_87bef2f": {
+      "deps": {
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-math",
+      "repo": {
+        "name": "ds-math-87bef2f",
+        "ref": "HEAD",
+        "rev": "87bef2f67b043819b7195ce6df3058bd3c321107",
+        "url": "https://github.com/dapphub/ds-math"
+      }
+    },
+    "ds-note_7170a08": {
+      "deps": {
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-note",
+      "repo": {
+        "name": "ds-note-7170a08",
+        "ref": "HEAD",
+        "rev": "7170a0881717e4aeb91527f6b596d820b62e7260",
+        "url": "https://github.com/dapphub/ds-note"
+      }
+    },
+    "ds-roles_188b3dd": {
+      "deps": {
+        "ds-auth": "ds-auth_52c6a32",
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-roles",
+      "repo": {
+        "name": "ds-roles-188b3dd",
+        "ref": "HEAD",
+        "rev": "188b3dd6497d1f8c17b5bb381b37bdf238e3d239",
+        "url": "https://github.com/dapphub/ds-roles"
+      }
+    },
+    "ds-spell_1af7390": {
+      "deps": {
+        "ds-exec": "ds-exec_f6b6176",
+        "ds-note": "ds-note_7170a08",
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-spell",
+      "repo": {
+        "name": "ds-spell-1af7390",
+        "ref": "HEAD",
+        "rev": "1af739014d6b9ab3bd782ba09b23d2f10521c55b",
+        "url": "https://github.com/dapphub/ds-spell"
+      }
+    },
+    "ds-stop_842e350": {
+      "deps": {
+        "ds-auth": "ds-auth_52c6a32",
+        "ds-note": "ds-note_7170a08",
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-stop",
+      "repo": {
+        "name": "ds-stop-842e350",
+        "ref": "HEAD",
+        "rev": "842e35008eddc28a914e56be94afb7de3aec9d1d",
+        "url": "https://github.com/dapphub/ds-stop"
+      }
+    },
+    "ds-test_8053e25": {
+      "deps": {},
+      "name": "ds-test",
+      "repo": {
+        "name": "ds-test-8053e25",
+        "ref": "HEAD",
+        "rev": "8053e2589749238451678b5a75028bc830dc31cb",
+        "url": "https://github.com/dapphub/ds-test"
+      }
+    },
+    "ds-thing_4c86a53": {
+      "deps": {
+        "ds-auth": "ds-auth_52c6a32",
+        "ds-math": "ds-math_87bef2f",
+        "ds-note": "ds-note_7170a08",
+        "ds-test": "ds-test_8053e25"
+      },
+      "name": "ds-thing",
+      "repo": {
+        "name": "ds-thing-4c86a53",
+        "ref": "HEAD",
+        "rev": "4c86a534b2cdaf7c7a8564dfd8572ef466615a00",
+        "url": "https://github.com/dapphub/ds-thing"
+      }
+    },
+    "ds-token_e637e3f": {
+      "deps": {
+        "ds-math": "ds-math_87bef2f",
+        "ds-stop": "ds-stop_842e350",
+        "ds-test": "ds-test_8053e25",
+        "erc20": "erc20_c4f5635"
+      },
+      "name": "ds-token",
+      "repo": {
+        "name": "ds-token-e637e3f",
+        "ref": "HEAD",
+        "rev": "e637e3f3aff929ca4e72966015c16df0b235ea2a",
+        "url": "https://github.com/dapphub/ds-token"
+      }
+    },
+    "ds-value_faae4cb": {
+      "deps": {
+        "ds-test": "ds-test_8053e25",
+        "ds-thing": "ds-thing_4c86a53"
+      },
+      "name": "ds-value",
+      "repo": {
+        "name": "ds-value-faae4cb",
+        "ref": "HEAD",
+        "rev": "faae4cb37922fcdb002793a34c7d410b0a23e737",
+        "url": "https://github.com/dapphub/ds-value"
+      }
+    },
+    "erc20_c4f5635": {
+      "deps": {},
+      "name": "erc20",
+      "repo": {
+        "name": "erc20-c4f5635",
+        "ref": "HEAD",
+        "rev": "c4f56358d57e55e6d1c6626798cd325c9cc57d92",
+        "url": "https://github.com/dapphub/erc20"
+      }
+    },
+    "sai_00ccfd7": {
+      "deps": {
+        "ds-chief": "ds-chief_a06b5e4",
+        "ds-guard": "ds-guard_f8b7f58",
+        "ds-roles": "ds-roles_188b3dd",
+        "ds-spell": "ds-spell_1af7390",
+        "ds-test": "ds-test_8053e25",
+        "ds-thing": "ds-thing_4c86a53",
+        "ds-token": "ds-token_e637e3f",
+        "ds-value": "ds-value_faae4cb"
+      },
+      "name": "sai",
+      "repo": {
+        "name": "sai-00ccfd7",
+        "ref": "HEAD",
+        "rev": "00ccfd780295e86cee54f57b6cd0673b036ae370",
+        "url": "https://github.com/makerdao/sai"
+      }
+    }
+  },
+  "this": {
+    "deps": {
+      "sai": "sai_00ccfd7"
+    },
+    "name": "sai-deploy-scripts"
+  },
+  "version": 1
+}

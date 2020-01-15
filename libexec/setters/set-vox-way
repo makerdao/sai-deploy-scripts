@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET VOX WAY:"
+
+way=$(jq -r ".vox_way | values" "$CONFIG_FILE")
+way=$(bc -l <<< "scale=27; e( l(${way} / 100 + 1)/(60 * 60 * 24 * 365)) * 10^27")
+way=$(seth --to-uint256 "${way%.*}")
+sethSend "$SAI_MOM" 'setWay(uint256)' "$way"

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+log "SET TUB AXE:"
+
+axe=$(jq -r ".tub_axe | values" "$CONFIG_FILE")
+axe=$(echo "($axe+100)"*10^25 | bc -l)
+axe=$(seth --to-uint256 "${axe%.*}")
+sethSend "$SAI_MOM" 'setAxe(uint256)' "$axe"

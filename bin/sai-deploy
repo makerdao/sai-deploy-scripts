@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+if [[ -z "$BIN_DIR" ]]; then
+    echo "Just execute \"sai-deploy <NETWORK>\" via nix"
+    exit 1
+fi
+
+OPTIND=2
+while getopts "c:f:" opt; do
+    case "$opt" in
+        f) export CONFIG="$OPTARG" ;;
+        *) ;;
+    esac
+done
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+test -z "$1" && echo "Missing network" && exit 1
+
+RPC_CHAIN="$(seth chain)"
+if [[ "$RPC_CHAIN" == "unknown" ]]; then
+    RPC_CHAIN="testchain"
+elif [[ "$RPC_CHAIN" == "ethlive" ]]; then
+    RPC_CHAIN="main"
+fi
+
+test "$RPC_CHAIN" == "$1" || (echo "Network doesn't match with current node" && exit 1)
+
+writeConfigFor "$1"
+
+"$LIBEXEC_DIR"/base-deploy |& tee "$OUT_DIR/sai-$1.log"
+
+log "${NETWORK} DEPLOYMENT COMPLETED SUCCESSFULLY"

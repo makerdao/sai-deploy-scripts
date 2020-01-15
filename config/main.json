@@ -1,0 +1,19 @@
+{
+  "description": "Mainnet deployment",
+  "tub_cap": "100000000",
+  "tub_mat": "150",
+  "tub_tax": "0",
+  "tub_fee": "5",
+  "tub_axe": "13",
+  "tub_gap": "0",
+  "tap_gap": "3",
+  "vox_way": "0",
+  "vox_how": "0",
+  "pit": "0x69076e44a9c70a67d5b79d95795aba299083c275",
+  "import": {
+    "gem": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "gov": "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2",
+    "pip": "0x729d19f657bd0614b4985cf1d82531c67569197b",
+    "pep": "0x99041f808d598b782d5a3e498681c2452a31da08"
+  }
+}

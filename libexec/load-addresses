@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+loadAddresses
