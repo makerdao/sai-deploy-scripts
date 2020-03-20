@@ -31,4 +31,4 @@ writeConfigFor "$1"
 
 "$LIBEXEC_DIR"/base-deploy |& tee "$OUT_DIR/sai-$1.log"
 
-log "${NETWORK} DEPLOYMENT COMPLETED SUCCESSFULLY"
+log "$(echo "$1" | tr '[:lower:]' '[:upper:]') DEPLOYMENT COMPLETED SUCCESSFULLY"

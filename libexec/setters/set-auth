@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# shellcheck source=lib/common.sh
+. "$LIB_DIR/common.sh"
+
+# Get config variables
+CONFIG_FILE="$OUT_DIR/config.json"
+# Get addresses
+loadAddresses
+
+ADM=$(jq -r ".import.authority | values" "$CONFIG_FILE")
+
+if [[ "$ADM" != "" ]]; then
+    SAI_ADM="$ADM"
+
+    log "SET MOM AUTHORITY:"
+
+    sethSend "$SAI_MOM" 'setAuthority(address)' "$SAI_ADM"
+
+    log "SET TOP AUTHORITY:"
+
+    sethSend "$SAI_TOP" 'setAuthority(address)' "$SAI_ADM"
+fi
+
+addAddresses <<EOF
+{
+    "SAI_ADM": "$(seth --to-checksum-address "$SAI_ADM")"
+}
+EOF

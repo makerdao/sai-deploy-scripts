@@ -12,12 +12,9 @@ test -z "$SAI_PIT" && SAI_PIT="0x0000000000000000000000000000000000000123"
 DAI_FAB=$(dappCreate sai DaiFab "$GEM_FAB" "$VOX_FAB" "$TUB_FAB" "$TAP_FAB" "$TOP_FAB" "$MOM_FAB" "$DAD_FAB")
 log "DAI_FAB: $DAI_FAB"
 
-if [ -z "$SAI_ADM" ]
-then
-    SAI_ADM=$(dappCreate sai DSRoles)
-    log "SAI_ADM: $SAI_ADM"
-    sethSend "$SAI_ADM" 'setRootUser(address,bool)' "$ETH_FROM" true
-fi
+SAI_ADM=$(dappCreate sai DSRoles)
+log "SAI_ADM: $SAI_ADM"
+sethSend "$SAI_ADM" 'setRootUser(address,bool)' "$ETH_FROM" true
 
 sethSend "$DAI_FAB" 'makeTokens()'
 sethSend "$DAI_FAB" 'makeVoxTub(address,address,address,address,address)' "$SAI_GEM" "$SAI_GOV" "$SAI_PIP" "$SAI_PEP" "$SAI_PIT"

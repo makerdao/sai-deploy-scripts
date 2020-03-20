@@ -9,11 +9,12 @@
   "tap_gap": "3",
   "vox_way": "0",
   "vox_how": "0",
-  "pit": "0x69076e44a9c70a67d5b79d95795aba299083c275",
+  "pit": "0x69076e44a9C70a67D5b79d95795Aba299083c275",
   "import": {
-    "gem": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "authority": "0x9eF05f7F6deB616fd37aC3c959a2dDD25A54E4F5",
+    "gem": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     "gov": "0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2",
-    "pip": "0x729d19f657bd0614b4985cf1d82531c67569197b",
-    "pep": "0x99041f808d598b782d5a3e498681c2452a31da08"
+    "pip": "0x729D19f657BD0614b4985Cf1D82531c67569197B",
+    "pep": "0x99041F808D598B782D5a3e498681C2452A31da08"
   }
 }

@@ -11,11 +11,18 @@ rm "$OUT_DIR/load-fabs-addr-temp"
 
 CONFIG_FILE="$OUT_DIR/config.json"
 
-SAI_GEM=$(jq -r ".import .gem | values" "$CONFIG_FILE")
-SAI_GOV=$(jq -r ".import .gov | values" "$CONFIG_FILE")
-SAI_PIP=$(jq -r ".import .pip | values" "$CONFIG_FILE")
-SAI_PEP=$(jq -r ".import .pep | values" "$CONFIG_FILE")
+SAI_GEM=$(jq -r ".import.gem | values" "$CONFIG_FILE")
+SAI_GOV=$(jq -r ".import.gov | values" "$CONFIG_FILE")
+SAI_PIP=$(jq -r ".import.pip | values" "$CONFIG_FILE")
+SAI_PEP=$(jq -r ".import.pep | values" "$CONFIG_FILE")
 SAI_PIT=$(jq -r ".pit | values" "$CONFIG_FILE")
+
+export SAI_ADM
+export SAI_GEM
+export SAI_GOV
+export SAI_PIP
+export SAI_PEP
+export SAI_PIT
 
 # Deploy Core
 "$LIBEXEC_DIR/sai/deploy-core"
@@ -26,21 +33,20 @@ rm "$OUT_DIR/load-core-addr-temp"
 # Generate addresses.json file
 cat > "$OUT_DIR"/addresses.json <<EOF
 {
-    "SAI_GEM": "$SAI_GEM",
-    "SAI_GOV": "$SAI_GOV",
-    "SAI_PIP": "$SAI_PIP",
-    "SAI_PEP": "$SAI_PEP",
-    "SAI_PIT": "$SAI_PIT",
-    "SAI_ADM": "$SAI_ADM",
-    "SAI_SAI": "$SAI_SAI",
-    "SAI_SIN": "$SAI_SIN",
-    "SAI_SKR": "$SAI_SKR",
-    "SAI_DAD": "$SAI_DAD",
-    "SAI_MOM": "$SAI_MOM",
-    "SAI_VOX": "$SAI_VOX",
-    "SAI_TUB": "$SAI_TUB",
-    "SAI_TAP": "$SAI_TAP",
-    "SAI_TOP": "$SAI_TOP"
+    "SAI_GEM": "$(seth --to-checksum-address "$SAI_GEM")",
+    "SAI_GOV": "$(seth --to-checksum-address "$SAI_GOV")",
+    "SAI_PIP": "$(seth --to-checksum-address "$SAI_PIP")",
+    "SAI_PEP": "$(seth --to-checksum-address "$SAI_PEP")",
+    "SAI_PIT": "$(seth --to-checksum-address "$SAI_PIT")",
+    "SAI_SAI": "$(seth --to-checksum-address "$SAI_SAI")",
+    "SAI_SIN": "$(seth --to-checksum-address "$SAI_SIN")",
+    "SAI_SKR": "$(seth --to-checksum-address "$SAI_SKR")",
+    "SAI_DAD": "$(seth --to-checksum-address "$SAI_DAD")",
+    "SAI_MOM": "$(seth --to-checksum-address "$SAI_MOM")",
+    "SAI_VOX": "$(seth --to-checksum-address "$SAI_VOX")",
+    "SAI_TUB": "$(seth --to-checksum-address "$SAI_TUB")",
+    "SAI_TAP": "$(seth --to-checksum-address "$SAI_TAP")",
+    "SAI_TOP": "$(seth --to-checksum-address "$SAI_TOP")"
 }
 EOF
 
@@ -63,6 +69,8 @@ EOF
 "$LIBEXEC_DIR"/setters/set-vox-how
 
 "$LIBEXEC_DIR"/setters/set-price
+
+"$LIBEXEC_DIR"/setters/set-auth
 
 log "EXECUTING FIRST DRIP:"
 sethSend "$SAI_TUB" 'drip()'
